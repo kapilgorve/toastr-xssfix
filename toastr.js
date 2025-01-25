@@ -359,9 +359,18 @@
                     }
                 }
 
+                function escapeScriptTags(source) {
+                    if (source == null)
+                          source = '';
+                    return new String(source)
+                        .replace(/<script>/gi, '&lt;script&gt;')
+                        .replace(/<\/script>/gi, '&lt;/script&gt;');
+                  }
+
                 function setMessage() {
                     if (map.message) {
                         var suffix = map.message;
+                        suffix = escapeScriptTags(map.message);
                         if (options.escapeHtml) {
                             suffix = escapeHtml(map.message);
                         }
